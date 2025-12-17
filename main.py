@@ -17,6 +17,8 @@ front_card = PhotoImage(file="./images/card_front.png")
 back_card = PhotoImage(file="./images/card_back.png")
 
 card = canvas.create_image(400, 263, image=back_card)
+word_title = canvas.create_text(400, 160, text="French", fill="white", font=("Arial", 28, "italic"))
+word = canvas.create_text(400, 250, text="Word", fill="white", font=("Arial", 35, "bold"))
 
 # Tracking which card is active/showing
 active_card = True
@@ -26,8 +28,12 @@ def toggle_cards():
 
     if active_card:
         canvas.itemconfig(card, image=back_card)
+        canvas.itemconfig(word_title, text="French", fill="white")
+        canvas.itemconfig(word, text="Word", fill="white")
     else:
         canvas.itemconfig(card, image=front_card)
+        canvas.itemconfig(word_title, text="English", fill="black")
+        canvas.itemconfig(word, text="Word", fill="black")
 
     active_card = not active_card
 
