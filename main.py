@@ -18,4 +18,24 @@ back_card = PhotoImage(file="./images/card_back.png")
 
 card = canvas.create_image(400, 263, image=back_card)
 
+
+# BUTTONS
+# Cancel Btns
+cancel_btn_icon = PhotoImage(file="./images/wrong.png")
+cancel_btn = Button(
+    image=cancel_btn_icon,
+    highlightthickness=0,
+    borderwidth=0
+)
+cancel_btn.grid(row=1, column=0)
+
+# Correct Btns
+correct_btn_icon = PhotoImage(file="./images/right.png")
+correct_btn = Button(
+    image=correct_btn_icon,
+    highlightthickness=0,
+    borderwidth=0
+)
+correct_btn.grid(row=1, column=1)
+
 root.mainloop()
