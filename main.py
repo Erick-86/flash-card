@@ -18,8 +18,24 @@ back_card = PhotoImage(file="./images/card_back.png")
 
 card = canvas.create_image(400, 263, image=back_card)
 
+# Tracking which card is active/showing
+active_card = True
 
-# BUTTONS
+def toggle_cards():
+    global active_card
+
+    if active_card:
+        canvas.itemconfig(card, image=back_card)
+    else:
+        canvas.itemconfig(card, image=front_card)
+
+    active_card = not active_card
+
+    root.after(3000, toggle_cards)
+
+root.after(3000, toggle_cards)
+
+#  BUTTONS
 # Cancel Btns
 cancel_btn_icon = PhotoImage(file="./images/wrong.png")
 cancel_btn = Button(
