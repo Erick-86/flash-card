@@ -1,4 +1,5 @@
 from tkinter import *
+import csv
 
 root = Tk()
 BACKGROUND_COLOR = "#B1DDC6"
@@ -15,6 +16,14 @@ front_card = PhotoImage(file="./images/card_front.png")
 
 # Back card
 back_card = PhotoImage(file="./images/card_back.png")
+
+# Loading words from csv file
+# words = []
+
+with open ("./data/french_words.csv", newline='', encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+    words = [row for row in reader]
+    print(words)
 
 card = canvas.create_image(400, 263, image=back_card)
 word_title = canvas.create_text(400, 160, text="French", fill="white", font=("Arial", 28, "italic"))
