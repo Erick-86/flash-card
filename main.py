@@ -1,5 +1,5 @@
 from tkinter import *
-import csv
+import csv, random
 
 root = Tk()
 BACKGROUND_COLOR = "#B1DDC6"
@@ -23,28 +23,35 @@ back_card = PhotoImage(file="./images/card_back.png")
 with open ("./data/french_words.csv", newline='', encoding="utf-8") as file:
     reader = csv.DictReader(file)
     words = [row for row in reader]
-    print(words)
+
+def select_word():
+    return random.choice(words)
+
+current_word = select_word()
 
 card = canvas.create_image(400, 263, image=back_card)
 word_title = canvas.create_text(400, 160, text="French", fill="white", font=("Arial", 28, "italic"))
-word = canvas.create_text(400, 250, text="Word", fill="white", font=("Arial", 35, "bold"))
+word = canvas.create_text(400, 250, text=current_word["French"], fill="white", font=("Arial", 35, "bold"))
 
 # Tracking which card is active/showing
 active_card = True
 
 def toggle_cards():
-    global active_card
+    global active_card, current_word
 
     if active_card:
-        canvas.itemconfig(card, image=back_card)
-        canvas.itemconfig(word_title, text="French", fill="white")
-        canvas.itemconfig(word, text="Word", fill="white")
-    else:
         canvas.itemconfig(card, image=front_card)
         canvas.itemconfig(word_title, text="English", fill="black")
-        canvas.itemconfig(word, text="Word", fill="black")
+        canvas.itemconfig(word, text=current_word["English"], fill="black")
+        active_card = False
+    else:
+        current_word = select_word()
+        canvas.itemconfig(card, image=back_card)
+        canvas.itemconfig(word_title, text="French", fill="white")
+        canvas.itemconfig(word, text=current_word["French"], fill="white")
+        active_card = True
 
-    active_card = not active_card
+    # active_card = not active_card
 
     root.after(3000, toggle_cards)
 
